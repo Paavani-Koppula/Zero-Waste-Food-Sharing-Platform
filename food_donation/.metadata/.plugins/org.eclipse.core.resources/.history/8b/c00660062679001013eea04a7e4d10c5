@@ -1,0 +1,42 @@
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@Service
+public class KafkaConsumerService {
+
+    private final CopyOnWriteArrayList<SseEmitter> emitters = new CopyOnWriteArrayList<>();
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
+    public SseEmitter subscribe() {
+        SseEmitter emitter = new SseEmitter(Long.MAX_VALUE);
+        emitters.add(emitter);
+
+        emitter.onCompletion(() -> emitters.remove(emitter));
+        emitter.onTimeout(() -> emitters.remove(emitter));
+
+        return emitter;
+    }
+
+    @KafkaListener(topics = "donations", groupId = "ngo-group")
+    public void listen(String message) {
+        try {
+            // Parse JSON message from Kafka
+            JsonNode jsonNode = objectMapper.readTree(message);
+            String donorName = jsonNode.get("donorName").asText();
+
+            // Create simplified message
+            String notification = "New donation from " + donorName;
+
+            // Send to all connected clients
+            for (SseEmitter emitter : emitters) {
+                try {
+                    emitter.send(SseEmitter.event().name("donation").data(notification));
+                } catch (IOException e) {
+                    emitters.remove(emitter);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // In case message parsing fails
+        }
+    }
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.food_app.respository.DonorRepository"/>
+    <fullyQualifiedTypeName name="org.springframework.context.annotation.Configuration"/>
+    <fullyQualifiedTypeName name="org.springframework.security.config.annotation.web.configuration.EnableWebSecurity"/>
+    <fullyQualifiedTypeName name="com.food_app.config.KafkaConfig"/>
+    <fullyQualifiedTypeName name="com.food_app.service.KafkaConsumerService"/>
+    <fullyQualifiedTypeName name="com.food_app.dto.DonationRequest"/>
+    <fullyQualifiedTypeName name="org.springframework.security.config.annotation.web.socket.EnableWebSocketSecurity"/>
+    <fullyQualifiedTypeName name="org.springframework.messaging.simp.stomp.StompEncoder"/>
+    <fullyQualifiedTypeName name="java.net.http.WebSocket"/>
+    <fullyQualifiedTypeName name="com.food_app.repository.NotificationRepository"/>
+    <fullyQualifiedTypeName name="com.food_app.controller.NotificationController"/>
+    <fullyQualifiedTypeName name="com.food_app.model.Ngos"/>
+    <fullyQualifiedTypeName name="org.springframework.context.annotation.Bean"/>
+    <fullyQualifiedTypeName name="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+    <fullyQualifiedTypeName name="com.food_app.repository.NgoRepository"/>
+</qualifiedTypeNameHistroy>
